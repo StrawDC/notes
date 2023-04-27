@@ -9,7 +9,9 @@ Ref 可以父传子,子传父,但是 vue 官方文档的建议是用来父传子
 首先在父组件中引入子组件,将引入的子组件写入到模板当中
 
 在子组件标签上,为其添加 ref 事件`ref="testStudent"`
+
 按钮用来调用父组件内的事件,使其能够调用子组件内的事件
+
 `this.$refs.ref事件名.子组件内的事件名;`
 `this.$refs.testStudent.ziMethods();`
 
@@ -63,4 +65,60 @@ export default {
   }
 }
 </script>
+```
+
+## Ref 子传父
+
+一.父组件引入子组件,为其添加 ref 事件
+
+```
+    <Child ref="testStudent" />
+```
+
+二.父组件`mounted`监听 ref 事件
+
+`this.$refs.模板ref名.$on("ref自定义事件名", 调用的事件名);`
+
+### 父组件
+
+```
+  mounted () {
+    // 监听事件
+    this.$refs.testStudent.$on('123', message => {
+      // 监听子组件发送的消息并响应
+      console.log(message)
+    })
+  },
+
+```
+
+### 子组件
+
+子组件调用父组件内事件,并传递参数
+
+`this.$emit("自定义事件名", 传递的数据);`
+
+```
+<template>
+  <div>
+    <button @click="getStudentName">Ref触发事件</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ZI',
+    data () {
+    return {
+      data: '子组件内数据'
+    }
+  },
+  methods: {
+    getStudentName () {
+      this.$emit("123", this.data);
+    },
+  }
+}
+</script>
+
 ```
