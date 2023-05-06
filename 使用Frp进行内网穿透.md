@@ -45,11 +45,11 @@ nohup ./frps -c frps.ini >/dev/null 2>&1 &
 ```
 [common]
 #公网IP
-server_addr = 124.221.244.19
+server_addr = 124.221.244.16
  # 与frps.ini的bind_port一致
 server_port = 7000
 # 与frps.ini的token一致
-token = 52010
+token = MIMA123
 login_fail_exit = false
 tls_enable=true
 
