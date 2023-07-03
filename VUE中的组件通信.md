@@ -140,10 +140,36 @@ export default {
     },
 ```
 
+    demo (x) {
+      console.log("demo被调用了", x);
+    },
+
 ### 子组件
 
 添加一个点击事件,触发自定义事件,第一个参数为父组件中的自定义参数名,第二个参数为要传递的值
 
 ```
-      this.$emit("testDemo", this.address);
+    this.$emit("testDemo", this.address);
 ```
+
+## 自定义事件，子传递父组件多个事件
+
+### 父组件定义事件
+···
+    <searchHead v-on:testDemo="demo" @event2="demo2"  @event3="demo3" />
+    
+    
+    
+    --------------
+    
+        demo2(x) {console.log（x）}
+        demo3(x) {console.log（x）}
+···
+
+
+### 子组件触发事件
+
+···
+      this.$emit("event2"，this.a);
+      this.$emit("event3"，this.b);
+···
